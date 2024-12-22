@@ -32,7 +32,7 @@ jobs:
             gh release create "$tag" \
                 --repo="$GITHUB_REPOSITORY" \
                 --title="${tag#v}" \
-                --generate-notes
+                --generate-notes \
                 ./dist/*
   # pypi-publish:
   #   name: Publish release to PyPI
