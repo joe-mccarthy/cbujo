@@ -1,0 +1,56 @@
+name: Publish and Release
+
+on:
+  push:
+    tags: [ '[0-9]+.[0-9]+.[0-9]+' ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+          fetch-depth: 0 
+    - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+      - name: Poetry
+        uses: abatilo/actions-poetry@v2
+      - name: Install and Build
+        run: |
+          poetry install
+          poetry build
+    - name: Create Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+      run: |
+          gh release create "$tag" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="${tag#v}" \
+              --generate-notes
+              ./dist/*
+  # pypi-publish:
+  #   name: Publish release to PyPI
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: pypi
+  #     url: https://pypi.org/p/cbujo
+  #   permissions:
+  #     id-token: write
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v4
+  #       with:
+  #         python-version: 3.12
+  #     - name: Poetry
+  #       uses: abatilo/actions-poetry@v2
+  #     - name: Install and Build
+  #       run: |
+  #         poetry install
+  #         poetry build
+  #     - name: Publish package distributions to PyPI
+  #       uses: pypa/gh-action-pypi-publish@release/v1
