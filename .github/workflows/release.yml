@@ -18,6 +18,7 @@ jobs:
       - name: Install and Build
         run: |
           poetry install
+          poetry run pytest
           poetry build
     - name: Create Release
       env:
