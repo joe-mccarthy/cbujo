@@ -21,6 +21,6 @@ jobs:
       - name: Install the project dependencies
         run: poetry install
       - name: Run tests
-        run: poetry run pytest --cov=night_sky_pi --cov-report xml --cov-report term
+        run: poetry run pytest --cov=cbujo --cov-report xml --cov-report term
       - name: Coveralls
         uses: coverallsapp/github-action@v2
