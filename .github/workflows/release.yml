@@ -34,25 +34,25 @@ jobs:
                 --title="${tag#v}" \
                 --generate-notes \
                 ./dist/*
-  # pypi-publish:
-  #   name: Publish release to PyPI
-  #   runs-on: ubuntu-latest
-  #   environment:
-  #     name: pypi
-  #     url: https://pypi.org/p/cbujo
-  #   permissions:
-  #     id-token: write
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v4
-  #       with:
-  #         python-version: 3.12
-  #     - name: Poetry
-  #       uses: abatilo/actions-poetry@v2
-  #     - name: Install and Build
-  #       run: |
-  #         poetry install
-  #         poetry build
-  #     - name: Publish package distributions to PyPI
-  #       uses: pypa/gh-action-pypi-publish@release/v1
+  pypi-publish:
+    name: Publish release to PyPI
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/cbujo
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+      - name: Poetry
+        uses: abatilo/actions-poetry@v2
+      - name: Install and Build
+        run: |
+          poetry install
+          poetry build
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
