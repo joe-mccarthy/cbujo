@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest    
     steps:    
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -20,16 +20,16 @@ jobs:
           poetry install
           poetry run pytest
           poetry build
-    - name: Create Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ github.ref_name }}
-      run: |
-          gh release create "$tag" \
-              --repo="$GITHUB_REPOSITORY" \
-              --title="${tag#v}" \
-              --generate-notes
-              ./dist/*
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+            gh release create "$tag" \
+                --repo="$GITHUB_REPOSITORY" \
+                --title="${tag#v}" \
+                --generate-notes
+                ./dist/*
   # pypi-publish:
   #   name: Publish release to PyPI
   #   runs-on: ubuntu-latest
