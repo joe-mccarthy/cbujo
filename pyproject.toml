@@ -3,8 +3,12 @@ name = "cbujo"
 version = "0.0.2"
 description = "Bullet Journal for the CLI"
 authors = ["Joe McCarthy <179146301+joe-mccarthy@users.noreply.github.com>"]
-license = "GPL-3.0"
+maintainers = ["Joe McCarthy <179146301+joe-mccarthy@users.noreply.github.com>"]
+documentation = "https://github.com/joe-mccarthy/cbujo"
+license = "GPL-3.0-only"
 readme = "README.md"
+homepage = "https://github.com/joe-mccarthy/cbujo"
+repository = "https://github.com/joe-mccarthy/cbujo"
 
 [tool.poetry.dependencies]
 python = "^3.12"
